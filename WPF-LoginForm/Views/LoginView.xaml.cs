@@ -63,5 +63,12 @@ namespace WPF_LoginForm.Views
             darkTheme.Source = new Uri("Dark.xaml", UriKind.Relative);
             Application.Current.Resources.MergedDictionaries.Add(darkTheme);
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Registration reg = new Registration();
+            reg.Show();
+            this.Close();
+        }
     }
 }

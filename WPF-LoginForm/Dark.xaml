@@ -1,6 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <Style x:Key="BorderStyle" TargetType="{x:Type Border}">
+    
+    <Style x:Key="BorderStyle" TargetType="{x:Type Border}">    
         <Setter Property="Background">
             <Setter.Value>
                 <ImageBrush ImageSource="/Images/дум тем.png" Stretch="Fill" />

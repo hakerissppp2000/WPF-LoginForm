@@ -134,8 +134,6 @@ namespace WPF_LoginForm.ViewModels
         public ICommand ShowPasswordCommand { get; }
         public ICommand RememberPasswordCommand { get; }
         //my
-        public ICommand OpenRegistrationCommand { get; private set; }
-        public ICommand BackToLogInCommand { get; private set; }
         public ICommand AddANewUserCommand { get; }
 
         //Constructor
@@ -145,32 +143,12 @@ namespace WPF_LoginForm.ViewModels
             userRepository = new UserRepository();
             LoginCommand = new ViewModelCommand(ExecuteLoginCommand, CanExecuteLoginCommand);
             RecoverPasswordCommand = new ViewModelCommand(p => ExecuteRecoverPassCommand("", ""));
-            //my
-            OpenRegistrationCommand = new ViewModelCommand(OpenRegistration);
-            BackToLogInCommand = new ViewModelCommand(BackToLogIn);
+       
             AddANewUserCommand = new ViewModelCommand(AddANewUser, ExecuteLoginCommand, CanExecuteLoginCommand);
         }
 
-    //my
-        public void OpenRegistration(object parametr)
-        {
-            
-
-            Registration registrationWindow = new Registration();
-            registrationWindow.Show();
-            loginWindow.Visibility = Visibility.Hidden ;
-        }
-      
-        public void BackToLogIn(object parametr)
-        {
-
-            loginWindow.Visibility = Visibility.Visible;
-            App.Current.MainWindow.Close();
-
-        }
-        //
             private bool CanExecuteLoginCommand(object obj)
-        {
+            {
             bool validData;
             if (string.IsNullOrWhiteSpace(Username) || Username.Length < 3 ||
                 Password == null || Password.Length < 3)
@@ -178,7 +156,7 @@ namespace WPF_LoginForm.ViewModels
             else
                 validData = true;
             return validData;
-        }
+            }
 
         private void ExecuteLoginCommand(object obj)
         {
@@ -191,7 +169,7 @@ namespace WPF_LoginForm.ViewModels
             }
             else
             {
-                //ErrorMessage = "* Invalid username or password";
+                ErrorMessage = "* Invalid username or password";
             }
         }
 

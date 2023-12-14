@@ -141,7 +141,7 @@
 
             <Border.Background>
                 <LinearGradientBrush StartPoint="0,1" Opacity="0.5" EndPoint="1,0">
-                    <GradientStop Color="#1B1448"  Offset="1"/>
+                    <GradientStop Color="#1B1448"  Offset="1"/> 
                 </LinearGradientBrush>
             </Border.Background>
 
@@ -332,7 +332,7 @@
                             </Button.Template>
                         </Button>
 
-                        <Button Content="Registration" Margin="2" Command="{Binding OpenRegistrationCommand}" HorizontalAlignment="Center">
+                        <Button Content="Registration" Margin="2" Click="Button_Click" HorizontalAlignment="Center">
                             <Button.Style>
                                 <Style TargetType="Button">
                                     <Setter Property="Background" Value="Transparent"/>
