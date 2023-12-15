@@ -14,6 +14,7 @@ namespace WPF_LoginForm.ViewModels
     {
         //Fields
         private UserAccountModel _currentUserAccount;
+        private string _UserNiw;
         private IUserRepository userRepository;
 
         public UserAccountModel CurrentUserAccount
@@ -27,6 +28,19 @@ namespace WPF_LoginForm.ViewModels
             {
                 _currentUserAccount = value;
                 OnPropertyChanged(nameof(CurrentUserAccount));
+            }
+        }
+        public string UserNow
+        {
+            get
+            {
+                return _UserNiw;
+            }
+
+            set
+            {
+                _UserNiw = value;
+                OnPropertyChanged(nameof(UserNow));
             }
         }
 
@@ -43,7 +57,7 @@ namespace WPF_LoginForm.ViewModels
             if (user != null)
             {
                 CurrentUserAccount.Username = user.Username;
-                CurrentUserAccount.DisplayName = $"Welcome {user.Name} {user.LastName} ;)";
+                UserNow = $"Welcome {user.Name} {user.LastName} ;)";
                 CurrentUserAccount.ProfilePicture = null;               
             }
             else

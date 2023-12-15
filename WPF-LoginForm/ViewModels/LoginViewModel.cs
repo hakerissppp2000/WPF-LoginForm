@@ -128,13 +128,17 @@ namespace WPF_LoginForm.ViewModels
             }
         }
 
-        //-> Commands
+ 
         public ICommand LoginCommand { get; }
         public ICommand RecoverPasswordCommand { get; }
+
+       
+
         public ICommand ShowPasswordCommand { get; }
-        public ICommand RememberPasswordCommand { get; }
+        public ICommand RememberPasswordCommand { get; } 
         //my
-        public ICommand AddANewUserCommand { get; }
+        public ICommand OpenRegistrationCommand { get; private set; } 
+        public ICommand BackToLogInCommand { get; private set; }
 
         //Constructor
         public LoginView loginWindow = LoginView.loginWindow;
@@ -143,11 +147,28 @@ namespace WPF_LoginForm.ViewModels
             userRepository = new UserRepository();
             LoginCommand = new ViewModelCommand(ExecuteLoginCommand, CanExecuteLoginCommand);
             RecoverPasswordCommand = new ViewModelCommand(p => ExecuteRecoverPassCommand("", ""));
-       
-            AddANewUserCommand = new ViewModelCommand(AddANewUser, ExecuteLoginCommand, CanExecuteLoginCommand);
+            
+            OpenRegistrationCommand = new ViewModelCommand(OpenRegistration);
+            BackToLogInCommand = new ViewModelCommand(BackToLogIn);
         }
 
-            private bool CanExecuteLoginCommand(object obj)
+
+        private void OpenRegistration(object sender)
+        {
+            IsViewVisible = false;
+            //loginWindow.Visibility = Visibility.Hidden;
+            Registration reg = new Registration();
+            reg.Show();
+        }
+
+        private void BackToLogIn(object sender)
+        {
+            
+            loginWindow.Visibility = Visibility.Visible;
+            App.Current.MainWindow.Close();
+        }
+
+        private bool CanExecuteLoginCommand(object obj)
             {
             bool validData;
             if (string.IsNullOrWhiteSpace(Username) || Username.Length < 3 ||
@@ -161,11 +182,20 @@ namespace WPF_LoginForm.ViewModels
         private void ExecuteLoginCommand(object obj)
         {
             var isValidUser = userRepository.AuthenticateUser(new NetworkCredential(Username, Password));
-            if (isValidUser)
+            var CurrentStatus = userRepository.GetStatus(new NetworkCredential(Username, Password));
+            if (isValidUser && CurrentStatus == "user")
             {
                 Thread.CurrentPrincipal = new GenericPrincipal(
                     new GenericIdentity(Username), null);
                 IsViewVisible = false;
+            }
+            if (isValidUser && CurrentStatus == "admin")
+            {
+                Thread.CurrentPrincipal = new GenericPrincipal(
+                    new GenericIdentity(Username), null);
+                AdminViewxaml admin = new AdminViewxaml();
+                admin.Show();
+                App.Current.MainWindow.Close(); 
             }
             else
             {
@@ -178,9 +208,6 @@ namespace WPF_LoginForm.ViewModels
             throw new NotImplementedException();
         }
 
-        private void AddANewUser(object par)
-        {
-
-        }
+        
     }
 }

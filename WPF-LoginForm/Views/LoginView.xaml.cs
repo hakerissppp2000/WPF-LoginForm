@@ -28,6 +28,7 @@ namespace WPF_LoginForm.Views
             InitializeComponent();
             loginWindow = this;
             viewModel = new LoginViewModel();
+           
             DataContext = viewModel;
         }
     

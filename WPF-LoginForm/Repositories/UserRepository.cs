@@ -32,8 +32,23 @@ namespace WPF_LoginForm.Repositories
             }
             return validUser;
         }
+        public string GetStatus(NetworkCredential credential)
+        { 
+            string status;
+            using (var connection = GetConnection())
+            using (var command = new SqlCommand())
+            {
+                connection.Open();
+                command.Connection = connection;
+                command.CommandText = "SELECT Status FROM [User] WHERE username=@username AND [password]=@password";
+                command.Parameters.Add("@username", SqlDbType.NVarChar).Value = credential.UserName;
+                command.Parameters.Add("@password", SqlDbType.NVarChar).Value = credential.Password;
+                status = command.ExecuteScalar() as string;
+            }
+            return status;
+        }
 
-        public void Edit(UserModel userModel)
+            public void Edit(UserModel userModel)
         {
             throw new NotImplementedException();
         }

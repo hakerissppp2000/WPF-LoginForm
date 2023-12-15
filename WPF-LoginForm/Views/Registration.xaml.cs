@@ -30,7 +30,7 @@ namespace WPF_LoginForm
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            this. Close();
         }
 
         private void btnLogin_Click(object sender, RoutedEventArgs e) { }
@@ -61,9 +61,9 @@ namespace WPF_LoginForm
 
             try
             {
-                SqlConnection con = new SqlConnection(@"Server=(local); Database=Guka_2; Integrated Security=True");
+                SqlConnection con = new SqlConnection(@"Server=(local); Database=Guka_4; Integrated Security=True");
                 con.Open();
-                string add_data = "INSERT INTO [dbo].[User] VALUES(@Username, @Password, @Name, @LastName, @Email)";
+                string add_data = "INSERT INTO [dbo].[User] VALUES(@Username, @Password, @Name, @LastName, @Email, 'user')";
                 SqlCommand cmd = new SqlCommand(add_data, con);
 
                 cmd.Parameters.AddWithValue("@Username", txtUser.Text);
