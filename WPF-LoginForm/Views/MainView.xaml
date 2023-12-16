@@ -17,6 +17,28 @@
     <Window.DataContext>
         <viewModel:MainViewModel/>
     </Window.DataContext>
+
+    <!--<Window.Resources>
+        <Style TargetType="{x:Type DataGrid}">
+            <Setter Property="BorderBrush" Value="White" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="RowBackground" Value="{x:Null}" />
+            <Setter Property="Padding" Value="5" />
+            <Setter Property="Margin" Value="10" />
+            <Setter Property="Opacity" Value="0.8" />
+            <Setter Property="GridLinesVisibility" Value="None" />
+            <Setter Property="FontFamily" Value="curier new"/>
+            <Setter Property="FontSize" Value="12"/>
+        </Style>
+        <Style TargetType="DataGridColumnHeader">
+            <Setter Property="Background" Value="#7D8CC7"/>
+        </Style>
+        <Style TargetType="DataGridRowHeader">
+            <Setter Property="Background" Value="SteelBlue"/>
+        </Style>
+        
+    </Window.Resources>-->
+
     <Grid>
         <Border CornerRadius="12" Style="{DynamicResource BorderStyle}">
             <Border CornerRadius="12"                    
@@ -114,14 +136,40 @@
 
                             <TabItem Header="user table" Background="Transparent" >
                                 <Grid>
-                                    <DataGrid x:Name="userGrid" IsReadOnly="True" AutoGenerateColumns="True" Margin="221,64,64,64" VerticalScrollBarVisibility="Auto"
-                                                                                                                                    HorizontalScrollBarVisibility="Auto"/>
+                                    <DataGrid x:Name="userGrid"
+                                              IsReadOnly="True"
+                                              AutoGenerateColumns="True" 
+                                              Margin="242,59,43,88"
+                                              VerticalScrollBarVisibility="Auto"
+                                              HorizontalScrollBarVisibility="Auto"
+                                              Background="Transparent" 
+                                              Foreground="White" 
+                                              HorizontalGridLinesBrush="White"
+                                              VerticalGridLinesBrush="White"
+                                              AlternatingRowBackground="Transparent"
+                                              RowBackground="Transparent"
+                                              BorderBrush="#FF8A8B93"
+                                              BorderThickness="1"
+                                              FontFamily="Courier New"
+                                              FontSize="14" AutomationProperties.IsOffscreenBehavior="Offscreen" FontStretch="Normal">
+                                        <DataGrid.ColumnHeaderStyle>
+                                            <Style TargetType="DataGridColumnHeader">
+                                                <Setter Property="Background" Value="#50FFFFFF" />
+                                                
+                                            </Style>
+                                        </DataGrid.ColumnHeaderStyle>
+                                    </DataGrid>
+                                           
 
-                                    <TextBlock Text="{Binding CurrentUserAccount.DisplayName}" FontSize="30" HorizontalAlignment="Left"
-                                                        VerticalAlignment="Top" Foreground="White" FontFamily="Comic Sans MS" Margin="178,0,0,0"/>
-                                    <StackPanel Height="260" Margin="22,64,589,64" >
+
+
+
+                                    <TextBlock Text="{Binding UserNow}" FontSize="30" HorizontalAlignment="Left"
+                                                        VerticalAlignment="Top" Foreground="White" FontFamily="courier new" Margin="178,0,0,0"/>
+                                    
+                                    <StackPanel Orientation="Horizontal" Margin="242,300,10,10" >
                                         <Button Click="SortByNameBt" Margin="10" Content="Sorted by Name" Height="30" Background="Transparent" Foreground="White"
-                                            FontSize="17" FontFamily="Calibri" BorderThickness="2">
+                                            FontSize="16" FontFamily="courier new" BorderThickness="2">
                                             <Button.Style>
                                                 <Style TargetType="{x:Type Button}">
                                                     <Setter Property="Template">
@@ -131,7 +179,7 @@
                                                                     <Border Background="{TemplateBinding Background}"
                                                                         BorderBrush="{TemplateBinding BorderBrush}"
                                                                         BorderThickness="{TemplateBinding BorderThickness}"
-                                                                        CornerRadius="10" />
+                                                                        CornerRadius="0" />
                                                                     <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                                                                 </Grid>
                                                             </ControlTemplate>
@@ -142,7 +190,7 @@
                                         </Button>
 
                                         <Button Click="SortByLastname" Margin="10" Content="Sorted by Lastame" Height="30" Background="Transparent" Foreground="White"
-         FontSize="17" FontFamily="Calibri" BorderThickness="2">
+                                                                FontSize="16" FontFamily="courier new" BorderThickness="2">
                                             <Button.Style>
                                                 <Style TargetType="{x:Type Button}">
                                                     <Setter Property="Template">
@@ -150,9 +198,9 @@
                                                             <ControlTemplate TargetType="{x:Type Button}">
                                                                 <Grid>
                                                                     <Border Background="{TemplateBinding Background}"
-                                     BorderBrush="{TemplateBinding BorderBrush}"
-                                     BorderThickness="{TemplateBinding BorderThickness}"
-                                     CornerRadius="10" />
+                                                                            BorderBrush="{TemplateBinding BorderBrush}"
+                                                                            BorderThickness="{TemplateBinding BorderThickness}"
+                                                                            CornerRadius="0" />
                                                                     <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                                                                 </Grid>
                                                             </ControlTemplate>
@@ -161,9 +209,9 @@
                                                 </Style>
                                             </Button.Style>
                                         </Button>
-                                        
+
                                         <Button Click="SortByStatus" Margin="10" Content="Sorted by Status" Height="30" Background="Transparent" Foreground="White"
-FontSize="17" FontFamily="Calibri" BorderThickness="2">
+                                                    FontSize="16" FontFamily="courier new" BorderThickness="2">
                                             <Button.Style>
                                                 <Style TargetType="{x:Type Button}">
                                                     <Setter Property="Template">
@@ -171,9 +219,9 @@ FontSize="17" FontFamily="Calibri" BorderThickness="2">
                                                             <ControlTemplate TargetType="{x:Type Button}">
                                                                 <Grid>
                                                                     <Border Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            CornerRadius="10" />
+                                                                            BorderBrush="{TemplateBinding BorderBrush}"
+                                                                            BorderThickness="{TemplateBinding BorderThickness}"
+                                                                            CornerRadius="0" />
                                                                     <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                                                                 </Grid>
                                                             </ControlTemplate>
@@ -184,11 +232,17 @@ FontSize="17" FontFamily="Calibri" BorderThickness="2">
                                         </Button>
                                     </StackPanel>
 
+                                    <StackPanel Margin="10,59,582,66">
+                                        <TextBlock Text="Your profile:" Foreground="White" FontFamily="courier new" FontSize="20" Margin="4"/>
+                                        <TextBlock Text="{Binding UserName}" Foreground="White" FontFamily="courier new" FontSize="15" Margin="4" TextDecorations="Underline"/>
+                                        <TextBlock Text="{Binding UserLastname}" Foreground="White" FontFamily="courier new" FontSize="15" Margin="4" TextDecorations="Underline"/>
+                                        <TextBlock Text="{Binding UserStatus}" Foreground="White" FontFamily="courier new" FontSize="15" Margin="4" TextDecorations="Underline"/>
+                                    </StackPanel>
+                                    
                                 </Grid>
 
                             </TabItem>
                             <TabItem Header="Settings" Background="Transparent">
-                                <Grid Margin="0,0,0,-42" />
                             </TabItem>
                         </TabControl>
 

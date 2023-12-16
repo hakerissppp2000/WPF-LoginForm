@@ -15,6 +15,9 @@ namespace WPF_LoginForm.ViewModels
         //Fields
         private UserAccountModel _currentUserAccount;
         private string _UserNiw;
+        private string _UserName;
+        private string _UserLastname;
+        private string _UserStatus;
         private IUserRepository userRepository;
 
         public UserAccountModel CurrentUserAccount
@@ -44,6 +47,48 @@ namespace WPF_LoginForm.ViewModels
             }
         }
 
+        public string UserName
+        {
+            get
+            {
+                return _UserName;
+            }
+
+            set
+            {
+                _UserName = value;
+                OnPropertyChanged(nameof(UserName));
+            }
+        }
+
+        public string UserLastname
+        {
+            get
+            {
+                return _UserLastname;
+            }
+
+            set
+            {
+                _UserLastname = value;
+                OnPropertyChanged(nameof(UserLastname));
+            }
+        }
+
+        public string UserStatus
+        {
+            get
+            {
+                return _UserStatus;
+            }
+
+            set
+            {
+                _UserStatus = value;
+                OnPropertyChanged(nameof(UserStatus));
+            }
+        }
+
         public MainViewModel()
         {
             userRepository = new UserRepository();
@@ -57,7 +102,10 @@ namespace WPF_LoginForm.ViewModels
             if (user != null)
             {
                 CurrentUserAccount.Username = user.Username;
-                UserNow = $"Welcome {user.Name} {user.LastName} ;)";
+                UserNow = $"Welcome, {user.Name} {user.LastName} ;)";
+                UserName =$"Name: {user.Name}";
+                UserLastname = $"Lastame: {user.LastName}";
+                UserStatus = $"Status: {user.Status}";
                 CurrentUserAccount.ProfilePicture = null;               
             }
             else
