@@ -185,6 +185,7 @@
                                 </TabItem.Header>
                                 <Grid>
                                     <DataGrid x:Name="userGrid"
+
                                               IsReadOnly="True"
                                               AutoGenerateColumns="True" 
                                               Margin="242,59,43,88"
@@ -280,14 +281,14 @@
                                         </Button>
                                     </StackPanel>
 
-                                    <StackPanel Margin="10,59,582,143">
+                                    <StackPanel Margin="21,59,571,143">
                                         <TextBlock Text="Your profile:" Foreground="White" FontFamily="courier new" FontSize="20" Margin="4"/>
                                         <TextBlock Text="{Binding UserName}" Foreground="White" FontFamily="courier new" FontSize="15" Margin="4" TextDecorations="Underline"/>
                                         <TextBlock Text="{Binding UserLastname}" Foreground="White" FontFamily="courier new" FontSize="15" Margin="4" TextDecorations="Underline"/>
                                         <TextBlock Text="{Binding UserStatus}" Foreground="White" FontFamily="courier new" FontSize="15" Margin="4" TextDecorations="Underline"/>
                                     </StackPanel>
                                     <StackPanel Visibility="{Binding StackPanelVisibility}" Margin="0,184,582,0">
-                                        <Button  Content="Add user" Background="Transparent" Foreground="White"
+                                        <Button Margin="0,0,0,5" Content="Add user" Background="Transparent" Foreground="White"
                                             FontSize="16" FontFamily="courier new" BorderThickness="2" Width="159" Height="30" Click="Button_Click">
                                             <Button.Style>
                                                 <Style TargetType="{x:Type Button}">
@@ -299,6 +300,66 @@
                              BorderBrush="{TemplateBinding BorderBrush}"
                              BorderThickness="{TemplateBinding BorderThickness}"
                              CornerRadius="0" />
+                                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                                </Grid>
+                                                            </ControlTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </Style>
+                                            </Button.Style>
+                                        </Button>
+                                        <Button  Content="Delete user" Margin="0,5,0,0" Background="Transparent" Foreground="White"
+               FontSize="16" FontFamily="courier new" BorderThickness="2" Width="159" Height="30" Click="Button_Click_1">
+                                            <Button.Style>
+                                                <Style TargetType="{x:Type Button}">
+                                                    <Setter Property="Template">
+                                                        <Setter.Value>
+                                                            <ControlTemplate TargetType="{x:Type Button}">
+                                                                <Grid>
+                                                                    <Border Background="{TemplateBinding Background}"
+                                                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                                                        CornerRadius="0" />
+                                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                                </Grid>
+                                                            </ControlTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </Style>
+                                            </Button.Style>
+                                        </Button>
+                                        <Button  Content="Edit user" Margin="0,10,0,0" Background="Transparent" Foreground="White"
+          FontSize="16" FontFamily="courier new" BorderThickness="2" Width="159" Height="30" Click="Button_Click_3">
+                                            <Button.Style>
+                                                <Style TargetType="{x:Type Button}">
+                                                    <Setter Property="Template">
+                                                        <Setter.Value>
+                                                            <ControlTemplate TargetType="{x:Type Button}">
+                                                                <Grid>
+                                                                    <Border Background="{TemplateBinding Background}"
+                                 BorderBrush="{TemplateBinding BorderBrush}"
+                                 BorderThickness="{TemplateBinding BorderThickness}"
+                                 CornerRadius="0" />
+                                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                                </Grid>
+                                                            </ControlTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </Style>
+                                            </Button.Style>
+                                        </Button>
+                                        <Button  Content="Update table" Margin="0,10,0,0" Background="Transparent" Foreground="White"
+                                                 FontSize="16" FontFamily="courier new" BorderThickness="2" Width="159" Height="30" Click="Button_Click_2">
+                                            <Button.Style>
+                                                <Style TargetType="{x:Type Button}">
+                                                    <Setter Property="Template">
+                                                        <Setter.Value>
+                                                            <ControlTemplate TargetType="{x:Type Button}">
+                                                                <Grid>
+                                                                    <Border Background="{TemplateBinding Background}"
+                                                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                                                        CornerRadius="0" />
                                                                     <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                                                                 </Grid>
                                                             </ControlTemplate>

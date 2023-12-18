@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Media;
 using WPF_LoginForm;
 using WPF_LoginForm.Models;
@@ -25,6 +26,8 @@ namespace WPF_LoginForm.ViewModels
         private string _UserStatus;
         private IUserRepository userRepository;
         private Visibility stackPanelVisibility = Visibility.Hidden;
+        private UserModel selectedUser;
+       
 
         public UserAccountModel CurrentUserAccount
         {
@@ -108,7 +111,19 @@ namespace WPF_LoginForm.ViewModels
                 OnPropertyChanged(nameof(StackPanelVisibility));
             }
         }
-
+        public UserModel SelectedUser
+        {
+            get { return selectedUser; }
+            set
+            {
+                if (selectedUser != value)
+                {
+                    selectedUser = value;
+                    OnPropertyChanged(nameof(SelectedUser));
+                }
+            }
+        }
+        
 
         public MainViewModel()
         {
@@ -138,6 +153,7 @@ namespace WPF_LoginForm.ViewModels
                 UserName =$"Name: {user.Name}";
                 UserLastname = $"Lastame: {user.LastName}";
                 UserStatus = $"Status: {user.Status}";
+                
                 CurrentUserAccount.ProfilePicture = null;
 
                 Colorss = new ObservableCollection<ColorInfo>

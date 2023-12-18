@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Security;
@@ -132,13 +133,14 @@ namespace WPF_LoginForm.ViewModels
         public ICommand LoginCommand { get; }
         public ICommand RecoverPasswordCommand { get; }
 
-       
+       public ICommand DeleteUserCommand { get; }
 
         public ICommand ShowPasswordCommand { get; }
         public ICommand RememberPasswordCommand { get; } 
         //my
         public ICommand OpenRegistrationCommand { get; private set; } 
         public ICommand BackToLogInCommand { get; private set; }
+      
 
         //Constructor
         public LoginView loginWindow = LoginView.loginWindow;
@@ -152,7 +154,7 @@ namespace WPF_LoginForm.ViewModels
             BackToLogInCommand = new ViewModelCommand(BackToLogIn);
         }
 
-
+      
         private void OpenRegistration(object sender)
         {
             IsViewVisible = false;

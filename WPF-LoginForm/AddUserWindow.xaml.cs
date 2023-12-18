@@ -17,42 +17,16 @@ using WPF_LoginForm.Views;
 namespace WPF_LoginForm
 {
     /// <summary>
-    /// Логика взаимодействия для Registration.xaml
+    /// Логика взаимодействия для AddUserWindow.xaml
     /// </summary>
-    public partial class Registration : Window
+    public partial class AddUserWindow : Window
     {
-      
-        public Registration()
+        public AddUserWindow()
         {
             InitializeComponent();
-
-        }
-
-        private void btnClose_Click(object sender, RoutedEventArgs e)
-        {
-            this. Close();
-        }
-
-        private void btnLogin_Click(object sender, RoutedEventArgs e) { }
-        private void btnMinimize_Click(object sender, RoutedEventArgs e)
-        {
-            WindowState = WindowState.Minimized;
-        }
-
-        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.LeftButton == MouseButtonState.Pressed)
-                DragMove();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            LoginView lg = new LoginView();
-            lg.Show();
-            this.Close();
-        }
-
-        private void btnLogin_Click_1(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrEmpty(txtUser.Text) || string.IsNullOrEmpty(txtPass.Text) || string.IsNullOrEmpty(txtName.Text) || string.IsNullOrEmpty(txtLastName.Text) || string.IsNullOrEmpty(txtEmail.Text))
             {
@@ -61,38 +35,49 @@ namespace WPF_LoginForm
 
             try
             {
+
                 if (!LoginExists(txtUser.Text))
                 {
                     SqlConnection con = new SqlConnection(@"Server=(local); Database=Guka_4; Integrated Security=True");
-                con.Open();
-                string add_data = "INSERT INTO [dbo].[User] VALUES(@Username, @Password, @Name, @LastName, @Email, 'user')";
-                SqlCommand cmd = new SqlCommand(add_data, con);
+                    con.Open();
+                    string add_data = "INSERT INTO [dbo].[User] VALUES(@Username, @Password, @Name, @LastName, @Email, @Status)";
+                    SqlCommand cmd = new SqlCommand(add_data, con);
 
-                cmd.Parameters.AddWithValue("@Username", txtUser.Text);
-                cmd.Parameters.AddWithValue("@Password", txtPass.Text);
-                cmd.Parameters.AddWithValue("@Name", txtName.Text);
-                cmd.Parameters.AddWithValue("@LastName", txtLastName.Text);
-                cmd.Parameters.AddWithValue("@Email", txtEmail.Text);
-                cmd.ExecuteNonQuery();
-                con.Close();
-                txtUser.Text = "";
-                txtPass.Text = "";
-                txtName.Text = "";
-                txtLastName.Text = "";
-                txtEmail.Text = "";
-               
-                this.Close();
+                    cmd.Parameters.AddWithValue("@Username", txtUser.Text);
+                    cmd.Parameters.AddWithValue("@Password", txtPass.Text);
+                    cmd.Parameters.AddWithValue("@Name", txtName.Text);
+                    cmd.Parameters.AddWithValue("@LastName", txtLastName.Text);
+                    cmd.Parameters.AddWithValue("@Email", txtEmail.Text);
+                    cmd.Parameters.AddWithValue("@Status", (StatusCombobox.SelectedItem as ComboBoxItem).Content.ToString());
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                    txtUser.Text = "";
+                    txtPass.Text = "";
+                    txtName.Text = "";
+                    txtLastName.Text = "";
+                    txtEmail.Text = "";
+                    MessageBox.Show("User added successfully");
+                    this.Close();
                 }
                 else
                 {
                     MessageBox.Show("A user with the same username already exists", "Error");
                 }
-
-            }
+                }
             catch
             {
 
             }
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+                DragMove();
         }
         public bool LoginExists(string login)
         {
