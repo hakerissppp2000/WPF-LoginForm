@@ -183,20 +183,13 @@ namespace WPF_LoginForm.ViewModels
         {
             var isValidUser = userRepository.AuthenticateUser(new NetworkCredential(Username, Password));
             var CurrentStatus = userRepository.GetStatus(new NetworkCredential(Username, Password));
-            if (isValidUser && CurrentStatus == "user")
+            if (isValidUser)
             {
                 Thread.CurrentPrincipal = new GenericPrincipal(
                     new GenericIdentity(Username), null);
                 IsViewVisible = false;
             }
-            if (isValidUser && CurrentStatus == "admin")
-            {
-                Thread.CurrentPrincipal = new GenericPrincipal(
-                    new GenericIdentity(Username), null);
-                AdminViewxaml admin = new AdminViewxaml();
-                admin.Show();
-                App.Current.MainWindow.Close(); 
-            }
+          
             else
             {
                 ErrorMessage = "* Invalid username or password";

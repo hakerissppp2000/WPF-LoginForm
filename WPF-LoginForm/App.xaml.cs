@@ -27,6 +27,7 @@ namespace WPF_LoginForm
                       loginView.Close();
                   }
               };
+
         }
     }
 }

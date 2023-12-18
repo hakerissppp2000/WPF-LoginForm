@@ -4,7 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF_LoginForm.Views"
-        xmlns:viewModel="clr-namespace:WPF_LoginForm.ViewModels"
+        xmlns:toolkit="clr-namespace:Xceed.Wpf.Toolkit.Obselete;assembly=Xceed.Wpf.Toolkit"
+        xmlns:viewModel="clr-namespace:WPF_LoginForm.ViewModels" xmlns:toolkit1="http://schemas.xceed.com/wpf/xaml/toolkit" xmlns:Helpers="clr-namespace:WPF_LoginForm.Helpers"
         mc:Ignorable="d"
         Title="MainWindowView" Height="450" Width="800"
         WindowStartupLocation="CenterScreen"
@@ -14,32 +15,77 @@
         AllowsTransparency="True"
         MouseDown="Window_MouseDown">
 
+
     <Window.DataContext>
         <viewModel:MainViewModel/>
     </Window.DataContext>
 
-    <!--<Window.Resources>
-        <Style TargetType="{x:Type DataGrid}">
-            <Setter Property="BorderBrush" Value="White" />
-            <Setter Property="BorderThickness" Value="0" />
-            <Setter Property="RowBackground" Value="{x:Null}" />
-            <Setter Property="Padding" Value="5" />
-            <Setter Property="Margin" Value="10" />
-            <Setter Property="Opacity" Value="0.8" />
-            <Setter Property="GridLinesVisibility" Value="None" />
-            <Setter Property="FontFamily" Value="curier new"/>
-            <Setter Property="FontSize" Value="12"/>
-        </Style>
-        <Style TargetType="DataGridColumnHeader">
-            <Setter Property="Background" Value="#7D8CC7"/>
-        </Style>
-        <Style TargetType="DataGridRowHeader">
-            <Setter Property="Background" Value="SteelBlue"/>
-        </Style>
+    <Window.Resources>
+        <Helpers:VisibilityConverter x:Key="VisibilityConverter" />
         
-    </Window.Resources>-->
+        <Style x:Key="NoArrowStyle" TargetType="toolkit1:ColorPicker">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="toolkit1:ColorPicker">
 
-    <Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <VisualBrush x:Key="CustomVisualBrush" Visual="{Binding ElementName=BorderStyle}"/>
+
+        <Style x:Key="TabControlStyle1" TargetType="TabItem">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TabItem">
+                        <Border Name="Border" BorderThickness="1,1,1,0" BorderBrush="Gainsboro" CornerRadius="4,4,0,0" Margin="2,0">
+                            <ContentPresenter x:Name="ContentSite"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"
+            ContentSource="Header"
+            Margin="10,2"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="Border" Property="BorderBrush" Value="White" />
+                                <Setter TargetName="Border" Property="BorderThickness" Value="2" />
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="False">
+                                <Setter TargetName="Border" Property="Background" Value="Transparent" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="TabControlStyle2" TargetType="TabItem">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TabItem">
+                        <Grid Name="Panel">
+                            <ContentPresenter x:Name="ContentSite"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        ContentSource="Header"
+                                        Margin="10,2"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="Panel" Property="Background" Value="#9AB2C3" />
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="False">
+                                <Setter TargetName="Panel" Property="Background" Value="Transparent" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid x:Name="GRID">
         <Border CornerRadius="12" Style="{DynamicResource BorderStyle}">
             <Border CornerRadius="12"                    
           BorderThickness="2"
@@ -120,21 +166,23 @@
                     </Grid>
 
                     <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="34*"/>
+                            <ColumnDefinition Width="165*"/>
+                        </Grid.ColumnDefinitions>
 
 
-                        <TabControl Grid.RowSpan="1" Background="Transparent">
+                        <TabControl Grid.RowSpan="1" Background="Transparent" Foreground="White" Grid.ColumnSpan="2" >
 
-                            <TabControl.Resources>
-                                <Style TargetType="TabItem">
-                                    <Style.Triggers>
-                                        <Trigger Property="IsSelected" Value="True">
-                                            <Setter Property="Background" Value="Red" />
-                                        </Trigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </TabControl.Resources>
 
-                            <TabItem Header="user table" Background="Transparent" >
+
+                            <TabItem Background="Transparent" Foreground="white" FontFamily="calibri" Style="{StaticResource TabControlStyle1}">
+                                <TabItem.Header>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Image.Source="/Images/home.png" Height="32" Width="29"/>
+                                        <Label Foreground="WHITE">Home</Label>
+                                    </StackPanel>
+                                </TabItem.Header>
                                 <Grid>
                                     <DataGrid x:Name="userGrid"
                                               IsReadOnly="True"
@@ -155,18 +203,18 @@
                                         <DataGrid.ColumnHeaderStyle>
                                             <Style TargetType="DataGridColumnHeader">
                                                 <Setter Property="Background" Value="#50FFFFFF" />
-                                                
+
                                             </Style>
                                         </DataGrid.ColumnHeaderStyle>
                                     </DataGrid>
-                                           
+
 
 
 
 
                                     <TextBlock Text="{Binding UserNow}" FontSize="30" HorizontalAlignment="Left"
                                                         VerticalAlignment="Top" Foreground="White" FontFamily="courier new" Margin="178,0,0,0"/>
-                                    
+
                                     <StackPanel Orientation="Horizontal" Margin="242,300,10,10" >
                                         <Button Click="SortByNameBt" Margin="10" Content="Sorted by Name" Height="30" Background="Transparent" Foreground="White"
                                             FontSize="16" FontFamily="courier new" BorderThickness="2">
@@ -232,17 +280,123 @@
                                         </Button>
                                     </StackPanel>
 
-                                    <StackPanel Margin="10,59,582,66">
+                                    <StackPanel Margin="10,59,582,143">
                                         <TextBlock Text="Your profile:" Foreground="White" FontFamily="courier new" FontSize="20" Margin="4"/>
                                         <TextBlock Text="{Binding UserName}" Foreground="White" FontFamily="courier new" FontSize="15" Margin="4" TextDecorations="Underline"/>
                                         <TextBlock Text="{Binding UserLastname}" Foreground="White" FontFamily="courier new" FontSize="15" Margin="4" TextDecorations="Underline"/>
                                         <TextBlock Text="{Binding UserStatus}" Foreground="White" FontFamily="courier new" FontSize="15" Margin="4" TextDecorations="Underline"/>
                                     </StackPanel>
-                                    
+                                    <StackPanel Visibility="{Binding StackPanelVisibility}" Margin="0,184,582,0">
+                                        <Button  Content="Add user" Background="Transparent" Foreground="White"
+                                            FontSize="16" FontFamily="courier new" BorderThickness="2" Width="159" Height="30" Click="Button_Click">
+                                            <Button.Style>
+                                                <Style TargetType="{x:Type Button}">
+                                                    <Setter Property="Template">
+                                                        <Setter.Value>
+                                                            <ControlTemplate TargetType="{x:Type Button}">
+                                                                <Grid>
+                                                                    <Border Background="{TemplateBinding Background}"
+                             BorderBrush="{TemplateBinding BorderBrush}"
+                             BorderThickness="{TemplateBinding BorderThickness}"
+                             CornerRadius="0" />
+                                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                                </Grid>
+                                                            </ControlTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </Style>
+                                            </Button.Style>
+                                        </Button>
+                                    </StackPanel>
                                 </Grid>
 
                             </TabItem>
-                            <TabItem Header="Settings" Background="Transparent">
+                            <TabItem Background="Transparent" Foreground="white" FontFamily="calibri" Style="{StaticResource TabControlStyle1}">
+                                <Grid>
+                                    <TabControl Background="Transparent" TabStripPlacement="Left" >
+
+                                        <TabItem Header="Background Color" Foreground="White" Background="Transparent" Style="{StaticResource TabControlStyle2}">
+                                            <Grid>
+
+                                                <TextBlock Text="Background" FontSize="20" HorizontalAlignment="Center" Margin="0,0,0,329"/>
+                                                <StackPanel Margin="0,36,0,0">
+                                                    <TextBlock/>
+                                                  
+                                                    <Canvas x:Name="cnvs1" Height="291">
+                                                        <TextBlock Canvas.Top="0" Text="Сhoose a background color" FontSize="17" HorizontalAlignment="Left"  Margin="0,0,0,329"/>
+                                                        <Grid Canvas.Top="40" Height="127" Width="204">
+                                                            <DataGrid IsReadOnly="True"
+                                                                      Name="colorGrid"
+                                                                      SelectionChanged="colorGrid_SelectionChanged"
+                                                                      AutoGenerateColumns="False"
+                                                                      ItemsSource="{Binding Colorss}"
+                                                                      Margin="0,0,-76,-22"
+                                                                      VerticalScrollBarVisibility="Auto"
+                                                                      HorizontalScrollBarVisibility="Auto"
+                                                                      Foreground="Black" 
+                                                                      HorizontalGridLinesBrush="White"
+                                                                      VerticalGridLinesBrush="White"
+                                                                      AlternatingRowBackground="Transparent"
+                                                                      RowBackground="Transparent"
+                                                                      BorderBrush="#FF8A8B93"
+                                                                      BorderThickness="1"
+                                                                      HeadersVisibility="Column"
+                                                                      FontSize="14" AutomationProperties.IsOffscreenBehavior="Offscreen" FontStretch="Normal">
+                                                                <!--<DataGrid.ColumnHeaderStyle>
+                                                                    <Style TargetType="DataGridColumnHeader">
+                                                                        <Setter Property="Background" Value="#50FFFFFF" />
+
+                                                                    </Style>
+                                                                </DataGrid.ColumnHeaderStyle>-->
+                                                                <DataGrid.Columns>
+                                                                    <DataGridTextColumn Header="Color Name" Binding="{Binding Name}" />
+                                                                    <DataGridTemplateColumn Header="Color Picker">
+                                                                        <DataGridTemplateColumn.CellTemplate>
+                                                                            <DataTemplate>
+                                                                                <toolkit1:ColorPicker IsEnabled="False" SelectedColor="{Binding Color}" />
+                                                                            </DataTemplate>
+                                                                        </DataGridTemplateColumn.CellTemplate>
+                                                                    </DataGridTemplateColumn>
+                                                                </DataGrid.Columns>
+                                                            </DataGrid>
+
+                                                        </Grid>
+                                                        <StackPanel Canvas.Top="210" Orientation="Horizontal" >
+                                                            <TextBlock Margin="6" FontSize="15" Text=" Additional color"/>
+                                                            <toolkit1:ColorPicker SelectedColorChanged="clr2_SelectedColorChanged"  x:Name="clr2" HorizontalAlignment="Center" VerticalAlignment="Top" Width="59" Height="27"/>
+
+                                                        </StackPanel>
+
+
+
+                                                    </Canvas>
+
+
+
+                                                </StackPanel>
+
+                                            </Grid>
+                                        </TabItem>
+                                        <TabItem Header="Background Picture" Foreground="White" Background="Transparent" Style="{StaticResource TabControlStyle2}"/>
+                                        <TabItem Header="Frame Color" Foreground="White" Background="Transparent" Style="{StaticResource TabControlStyle2}"/>
+                                        <TabItem Header="Themes" Foreground="White" Background="Transparent" Style="{StaticResource TabControlStyle2}"/>
+                                    </TabControl>
+                                </Grid>
+                                <TabItem.Header>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Image.Source="/Images/привод.png" Height="27" Width="33"/>
+                                        <Label Foreground="WHITE" RenderTransformOrigin="0.5,0.5">
+                                            <Label.RenderTransform>
+                                                <TransformGroup>
+                                                    <ScaleTransform/>
+                                                    <SkewTransform/>
+                                                    <RotateTransform Angle="-0.189"/>
+                                                    <TranslateTransform/>
+                                                </TransformGroup>
+                                            </Label.RenderTransform> Settings
+                                        </Label>
+                                    </StackPanel>
+                                </TabItem.Header>
                             </TabItem>
                         </TabControl>
 

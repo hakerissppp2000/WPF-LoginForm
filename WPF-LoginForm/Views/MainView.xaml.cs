@@ -13,6 +13,10 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Collections.ObjectModel;
+using Xceed.Wpf.Toolkit.Core.Media;
+using WPF_LoginForm.ViewModels;
+using Xceed.Wpf.Toolkit;
 
 namespace WPF_LoginForm.Views
 {
@@ -23,7 +27,11 @@ namespace WPF_LoginForm.Views
     {
         public MainView()
         {
+            
             InitializeComponent();
+            
+
+
             string connectionString = "Server=(local);Database=Guka_4; Integrated Security=True";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -43,14 +51,13 @@ namespace WPF_LoginForm.Views
                 }
             }
         }
-
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
         private void btnMinimize_Click(object sender, RoutedEventArgs e)
         {
-            WindowState = WindowState.Minimized;
+            //WindowState = WindowState.Minimized;
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
@@ -123,6 +130,50 @@ namespace WPF_LoginForm.Views
                     }
                 }
             }
+        }
+
+      
+       
+        public Color clr { get; set; }
+
+
+        private void colorGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (colorGrid.SelectedItem != null)
+            {
+                var selectedColorInfo = (ColorInfo)colorGrid.SelectedItem;
+                // Use the selectedColorInfo in your logic
+                // for example:
+                clr = selectedColorInfo.Color;
+                SolidColorBrush brush = new SolidColorBrush(clr);
+
+                // Установка значения свойства "Background" стиля "BorderStyle" в созданный объект brush
+                Resources["BorderStyle"] = new Style(typeof(Border))
+                {
+                    Setters = { new Setter(Border.BackgroundProperty, brush) }
+                };
+            }
+        }
+
+        private void clr2_SelectedColorChanged(object sender, RoutedPropertyChangedEventArgs<Color?> e)
+        {
+            var selectedColorInfo = clr2.SelectedColor;
+
+
+                clr = (Color)selectedColorInfo;
+                SolidColorBrush brush = new SolidColorBrush(clr);
+
+                // Установка значения свойства "Background" стиля "BorderStyle" в созданный объект brush
+                Resources["BorderStyle"] = new Style(typeof(Border))
+                {
+                    Setters = { new Setter(Border.BackgroundProperty, brush) }
+                };
+            
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
