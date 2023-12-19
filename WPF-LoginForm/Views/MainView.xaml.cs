@@ -376,6 +376,7 @@ namespace WPF_LoginForm.Views
             ResourceDictionary darkTheme = new ResourceDictionary();
             darkTheme.Source = new Uri("Dark.xaml", UriKind.Relative);
             Application.Current.Resources.MergedDictionaries.Add(darkTheme);
+
         }
     }
 }
