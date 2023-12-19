@@ -22,7 +22,7 @@
 
     <Window.Resources>
         <Helpers:VisibilityConverter x:Key="VisibilityConverter" />
-        
+
         <Style x:Key="NoArrowStyle" TargetType="toolkit1:ColorPicker">
             <Setter Property="Template">
                 <Setter.Value>
@@ -376,22 +376,24 @@
                                 <Grid>
                                     <TabControl Background="Transparent" TabStripPlacement="Left" >
 
-                                        <TabItem Header="Background Color" Foreground="White" Background="Transparent" Style="{StaticResource TabControlStyle2}">
+                                        <TabItem Header="Background Color" Foreground="White" Background="Transparent" Style="{StaticResource TabControlStyle2}" Height="19" VerticalAlignment="Bottom">
                                             <Grid>
 
                                                 <TextBlock Text="Background" FontSize="20" HorizontalAlignment="Center" Margin="0,0,0,329"/>
                                                 <StackPanel Margin="0,36,0,0">
                                                     <TextBlock/>
-                                                  
+
                                                     <Canvas x:Name="cnvs1" Height="291">
                                                         <TextBlock Canvas.Top="0" Text="Сhoose a background color" FontSize="17" HorizontalAlignment="Left"  Margin="0,0,0,329"/>
                                                         <Grid Canvas.Top="40" Height="127" Width="204">
-                                                            <DataGrid IsReadOnly="True"
+
+                                                            <DataGrid Height="150" Width="200"
+                                                                IsReadOnly="True"
                                                                       Name="colorGrid"
                                                                       SelectionChanged="colorGrid_SelectionChanged"
                                                                       AutoGenerateColumns="False"
                                                                       ItemsSource="{Binding Colorss}"
-                                                                      Margin="0,0,-76,-22"
+                                                                      Margin="0,0,-27,-22"
                                                                       VerticalScrollBarVisibility="Auto"
                                                                       HorizontalScrollBarVisibility="Auto"
                                                                       Foreground="Black" 
@@ -438,9 +440,133 @@
 
                                             </Grid>
                                         </TabItem>
-                                        <TabItem Header="Background Picture" Foreground="White" Background="Transparent" Style="{StaticResource TabControlStyle2}"/>
-                                        <TabItem Header="Frame Color" Foreground="White" Background="Transparent" Style="{StaticResource TabControlStyle2}"/>
-                                        <TabItem Header="Themes" Foreground="White" Background="Transparent" Style="{StaticResource TabControlStyle2}"/>
+                                        <TabItem Header="Background Picture" Foreground="White" Background="Transparent" Style="{StaticResource TabControlStyle2}">
+                                            <Grid>
+                                                <TextBlock Text="Background" FontSize="20" HorizontalAlignment="Center" Margin="0,0,0,329"/>
+                                                <StackPanel Margin="0,36,0,0">
+                                                    <TextBlock  Text="Сhoose a background picture" FontSize="17" HorizontalAlignment="Left"/>
+                                                    <StackPanel Orientation="Horizontal">
+
+                                                        <Button Height="70" Width="150" Margin="0,0,4,0" Click="Button_Click_6">
+                                                            <Button.Background>
+                                                                <ImageBrush ImageSource="/Images/дум тем.png"/>
+                                                            </Button.Background>
+                                                        </Button>
+                                                        <Button Height="70" Width="150" Margin="0,0,4,0" Click="Button_Click_5">
+                                                            <Button.Background>
+                                                                <ImageBrush ImageSource="/Images/back-image2.jpg"/>
+                                                            </Button.Background>
+                                                        </Button>
+                                                        <Button Height="70" Width="150" Click="Button_Click_4">
+                                                            <Button.Background>
+                                                                <ImageBrush ImageSource="/Images/back3.jpg"/>
+                                                            </Button.Background>
+                                                        </Button>
+
+                                                    </StackPanel>
+                                                    <Button Margin="0,20,0,0" Content="Add your image" Background="Transparent" Foreground="White" 
+               FontSize="16" FontFamily="courier new" BorderThickness="2" Width="159" Height="30" Click="Button_Click_7"  HorizontalAlignment="Left">
+                                                        <Button.Style>
+                                                            <Style TargetType="{x:Type Button}">
+                                                                <Setter Property="Template">
+                                                                    <Setter.Value>
+                                                                        <ControlTemplate TargetType="{x:Type Button}">
+                                                                            <Grid>
+                                                                                <Border Background="{TemplateBinding Background}"
+BorderBrush="{TemplateBinding BorderBrush}"
+BorderThickness="{TemplateBinding BorderThickness}"
+CornerRadius="0" />
+                                                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                                            </Grid>
+                                                                        </ControlTemplate>
+                                                                    </Setter.Value>
+                                                                </Setter>
+                                                            </Style>
+                                                        </Button.Style>
+                                                    </Button>
+                                                </StackPanel>
+
+                                            </Grid>
+                                        </TabItem>
+                                        <TabItem Header="Frame Color" Foreground="White" Background="Transparent" Style="{StaticResource TabControlStyle2}">
+                                            <Grid>
+
+                                                <TextBlock Text="Frame Color" FontSize="20" HorizontalAlignment="Center" Margin="0,0,0,334"/>
+                                                <StackPanel Margin="0,36,0,0">
+
+                                                    <Canvas Height="307">
+                                                        <TextBlock Canvas.Top="0" Text="Сhoose a frame color" FontSize="17" HorizontalAlignment="Left"  Margin="0,0,0,329"/>
+                                                        <Grid Canvas.Top="40" Height="127" Width="204">
+                                                            <DataGrid IsReadOnly="True" x:Name="RamkiGrid"  Height="150" Width="200" HorizontalAlignment="Left"
+                           
+                           SelectionChanged="DataGrid_SelectionChanged"
+                           AutoGenerateColumns="False"
+                           ItemsSource="{Binding Colorss}"
+                           Margin="0,0,-76,-22"
+                           VerticalScrollBarVisibility="Auto"
+                           HorizontalScrollBarVisibility="Auto"
+                           Foreground="Black" 
+                           HorizontalGridLinesBrush="White"
+                           VerticalGridLinesBrush="White"
+                           AlternatingRowBackground="Transparent"
+                           RowBackground="Transparent"
+                           BorderBrush="#FF8A8B93"
+                           BorderThickness="1"
+                           HeadersVisibility="Column"
+                           FontSize="14" AutomationProperties.IsOffscreenBehavior="Offscreen" FontStretch="Normal">
+                                                                <!--<DataGrid.ColumnHeaderStyle>
+                         <Style TargetType="DataGridColumnHeader">
+                             <Setter Property="Background" Value="#50FFFFFF" />
+
+                         </Style>
+                     </DataGrid.ColumnHeaderStyle>-->
+                                                                <DataGrid.Columns>
+                                                                    <DataGridTextColumn Header="Color Name" Binding="{Binding Name}" />
+                                                                    <DataGridTemplateColumn Header="Color Picker">
+                                                                        <DataGridTemplateColumn.CellTemplate>
+                                                                            <DataTemplate>
+                                                                                <toolkit1:ColorPicker IsEnabled="False" SelectedColor="{Binding Color}" />
+                                                                            </DataTemplate>
+                                                                        </DataGridTemplateColumn.CellTemplate>
+                                                                    </DataGridTemplateColumn>
+                                                                </DataGrid.Columns>
+                                                            </DataGrid>
+                                                           
+                                                        </Grid>
+                                                        <StackPanel Canvas.Top="210" Orientation="Horizontal" >
+                                                            <TextBlock Margin="6" FontSize="15" Text=" Additional color"/>
+                                                            <toolkit1:ColorPicker SelectedColorChanged="clr3_SelectedColorChanged"  x:Name="clr4" HorizontalAlignment="Center" VerticalAlignment="Top" Width="59" Height="27"/>
+
+                                                        </StackPanel>
+
+
+
+                                                    </Canvas>
+
+
+
+                                                </StackPanel>
+
+                                            </Grid>
+                                        </TabItem>
+                                        <TabItem Header="Themes" Foreground="White" Background="Transparent" Style="{StaticResource TabControlStyle2}">
+                                            <Grid>
+                                                
+                                            
+                                            <Button Height="200" Width="200" Content="LIGHT THEME" Foreground="White" 
+               FontSize="16" FontFamily="courier new" BorderThickness="2" Click="Button_Click_8"  HorizontalAlignment="Left">
+                                                    <Button.Background>
+                                                        <ImageBrush ImageSource="/Images/tema2.png"/>
+                                                    </Button.Background>
+                                                </Button>
+                                                <Button Height="200" Width="200" Content="DARK THEME" Foreground="White" 
+               FontSize="16" FontFamily="courier new" BorderThickness="2" Click="Button_Click_9"  HorizontalAlignment="Left" Margin="334,78,0,87">
+                                                    <Button.Background>
+                                                        <ImageBrush ImageSource="/Images/tema1.png"/>
+                                                    </Button.Background>
+                                                </Button>
+                                            </Grid>
+                                        </TabItem>
                                     </TabControl>
                                 </Grid>
                                 <TabItem.Header>

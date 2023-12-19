@@ -126,6 +126,18 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="imageDicts\DoomTem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="imageDicts\lightTem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="imageDicts\RainTem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\AdminViewxaml.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -209,6 +221,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\привод.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\back3.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\tema1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\tema2.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Web.WebView2.1.0.1264.42\build\Microsoft.Web.WebView2.targets" Condition="Exists('..\packages\Microsoft.Web.WebView2.1.0.1264.42\build\Microsoft.Web.WebView2.targets')" />

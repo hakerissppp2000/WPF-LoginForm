@@ -143,8 +143,9 @@ namespace WPF_LoginForm.Views
       
        
         public Color clr { get; set; }
+        public Color clrtwo { get; set; }
 
-
+        //фон грида цвет
         private void colorGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (colorGrid.SelectedItem != null)
@@ -188,27 +189,10 @@ namespace WPF_LoginForm.Views
             {
                 DataRowView row = (DataRowView)userGrid.SelectedItem;
                 int userId = Convert.ToInt32(row["Id"]);
-                //string userName = Convert.ToString(row["Username"]);
-                // string name = Convert.ToString(row["Name"]);
-                // string lastname = Convert.ToString(row["Lastname"]);
-                // string email = Convert.ToString(row["Email"]);
-                //string status = Convert.ToString(row["Status"]);
                 Delete_User(userId);
             }
         }
-        //private bool CheckSelectedItems()
-        //{
-        //    bool check;
-        //    if (userGrid.SelectedItem != null && userGrid.SelectedItem is DataRowView)
-        //    {
-        //        check = true;
-        //    }
-        //    else
-        //    {
-        //        check = false;
-        //    }
-        //    return check;
-        //}
+ 
 
         public string ElementiGrida(string nazvanie)
         {
@@ -285,6 +269,113 @@ namespace WPF_LoginForm.Views
        public string email { get; set; }
        public string status { get; set; }
        public int id { get; set; }
+
+        private void Button_Click_4(object sender, RoutedEventArgs e)
+        {
+            
+            ImageBrush brush = new ImageBrush();
+            brush.ImageSource = new BitmapImage(new Uri("C:\\Users\\Маргарита\\source\\repos\\Login-In-WPF-MVVM-C-Sharp-and-SQL-Server-main\\WPF-LoginForm\\Images\\back3.jpg", UriKind.Relative));
+
+            Resources["BorderStyle"] = new Style(typeof(Border))
+            {
+                Setters = { new Setter(Border.BackgroundProperty, brush) }
+            };
         
+        }
+
+        private void Button_Click_5(object sender, RoutedEventArgs e)
+        {
+            ImageBrush brush = new ImageBrush();
+            brush.ImageSource = new BitmapImage(new Uri("C:\\Users\\Маргарита\\source\\repos\\Login-In-WPF-MVVM-C-Sharp-and-SQL-Server-main\\WPF-LoginForm\\Images\\back-image2.jpg", UriKind.Relative));
+
+            Resources["BorderStyle"] = new Style(typeof(Border))
+            {
+                Setters = { new Setter(Border.BackgroundProperty, brush) }
+            };
+  
+        }
+
+        private void Button_Click_6(object sender, RoutedEventArgs e)
+        {
+            ImageBrush brush = new ImageBrush();
+            brush.ImageSource = new BitmapImage(new Uri("C:\\Users\\Маргарита\\source\\repos\\Login-In-WPF-MVVM-C-Sharp-and-SQL-Server-main\\WPF-LoginForm\\Images\\дум тем.png", UriKind.Relative));
+
+            Resources["BorderStyle"] = new Style(typeof(Border))
+            {
+                Setters = { new Setter(Border.BackgroundProperty, brush) }
+            };
+          
+        }
+
+        private void Button_Click_7(object sender, RoutedEventArgs e)
+        {
+            var openFileDialog = new Microsoft.Win32.OpenFileDialog();
+            openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.gif;*.bmp|All Files|*.*";
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                ImageBrush brush = new ImageBrush();
+                brush.ImageSource = new BitmapImage(new Uri(openFileDialog.FileName, UriKind.Absolute));
+
+                Resources["BorderStyle"] = new Style(typeof(Border))
+                {
+                    Setters = { new Setter(Border.BackgroundProperty, brush) }
+                };
+            }
+        }
+
+        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+            if (RamkiGrid.SelectedItem != null && RamkiGrid.SelectedItem != null)
+            {
+                var selectedColorInfo = (ColorInfo)RamkiGrid.SelectedItem;
+                clr = selectedColorInfo.Color;
+                //LinearGradientBrush brush = new LinearGradientBrush();
+                //brush.StartPoint = new Point(0, 0);
+                //brush.EndPoint = new Point(1, 1);
+                //brush.GradientStops.Add(new GradientStop(clr, 0.0));
+                //brush.GradientStops.Add(new GradientStop(clr, 1.1));
+                //Resources["RamkiStyle"] = new Style(typeof(Border))
+                //{
+                //    Setters = { new Setter(Border.BorderBrushProperty, brush) }
+                //};
+                SolidColorBrush brush = new SolidColorBrush(clr);
+
+                Resources["RamkiStyle"] = new Style(typeof(Border))
+                {
+                    Setters = { new Setter(Border.BorderBrushProperty, brush) }
+                };
+            }
+        }
+
+        private void clr3_SelectedColorChanged(object sender, RoutedPropertyChangedEventArgs<Color?> e)
+        {
+
+            var selectedColorInfo = clr4.SelectedColor;
+
+
+            clr = (Color)selectedColorInfo;
+            SolidColorBrush brush = new SolidColorBrush(clr);
+
+            Resources["RamkiStyle"] = new Style(typeof(Border))
+            {
+                Setters = { new Setter(Border.BorderBrushProperty, brush) }
+            };
+        }
+
+        private void Button_Click_8(object sender, RoutedEventArgs e)
+        {
+            ResourceDictionary lightTheme = new ResourceDictionary();
+            lightTheme.Source = new Uri("Light.xaml", UriKind.Relative);
+            Application.Current.Resources.MergedDictionaries.Add(lightTheme);
+        }
+
+        private void Button_Click_9(object sender, RoutedEventArgs e)
+        {
+            ResourceDictionary darkTheme = new ResourceDictionary();
+            darkTheme.Source = new Uri("Dark.xaml", UriKind.Relative);
+            Application.Current.Resources.MergedDictionaries.Add(darkTheme);
+        }
     }
 }
